@@ -27,7 +27,11 @@ public class ObjectScript : MonoBehaviour
         {
             LevelManager.Instance.player.GetComponent<PlayerInteraction>().interactingGameobject = transform.gameObject;
         }
+
+        DoStuff();
     }
+
+    public virtual void DoStuff() { }
 
     public void StopInteract()
     {

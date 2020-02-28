@@ -20,4 +20,10 @@ public class Bed : ObjectScript, IInteraction
             LevelManager.Instance.ui.UpdateToDo();
         }
     }
+
+    public override void DoStuff()
+    {
+        Debug.Log("Potato");
+        base.DoStuff();
+    }
 }

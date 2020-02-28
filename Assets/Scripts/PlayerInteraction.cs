@@ -15,7 +15,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (playerIsInteracting)
         {
-            interactingGameobject.GetComponent<InteractionScript>().StopInteract();
+            interactingGameobject.GetComponent<ObjectScript>().StopInteract();
             playerIsInteracting = false;
             interactingGameobject = null;
         }
@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 catch
                 {
-                    Debug.LogWarning("Object clicked doesnt have an InteractionScript script.");
+                    Debug.LogWarning("Object clicked doesnt have an Object script.");
                 }
             }
         }

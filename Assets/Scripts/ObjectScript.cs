@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ObjectScript : MonoBehaviour
 {
@@ -9,51 +10,50 @@ public class ObjectScript : MonoBehaviour
     public void InteractWithObject(RaycastHit hit)
     {
         if ( interactable ) {
-            hit.transform.GetComponent<InteractionScript>().Interact();
-        }
-        else if ( hit.transform.name == "Bed" && LevelManager.Instance.ui.taskSet1Progression == 1 && LevelManager.Instance.day == 0 )
-        {
-            LevelManager.Instance.ui.UpdateToDo();
-            LevelManager.Instance.ui.taskSet1Progression = 0;
-        }
-        else if( hit.transform.name == "Bed" && LevelManager.Instance.ui.eggsFound == 2 && LevelManager.Instance.day == 1 )
-        {
-            LevelManager.Instance.ui.UpdateToDo();
-        }
-        else if (hit.transform.name == "Bed" && LevelManager.Instance.ui.taskSet1Progression == 1 && LevelManager.Instance.day == 2)
-        {
-            LevelManager.Instance.ui.UpdateToDo();
+            Interact();
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private bool playerHoldingObject = false;
+
+    public void Interact()
     {
-        if(other.transform.tag == "EggBasket" && transform.name == "Egg")
-        {
-            LevelManager.Instance.ui.eggsFound++;
-            LevelManager.Instance.ui.UpdateToDo();
-        }
+        Debug.Log("Got to the Interact void");
 
-        if (other.transform.tag == "Pet" && transform.name == "Seeds" && LevelManager.Instance.ui.taskSet1Progression == 0 && LevelManager.Instance.day == 1)
-        {
-            LevelManager.Instance.ui.taskSet1Progression++;
-            LevelManager.Instance.ui.UpdateToDo();
-            Destroy(transform.gameObject);
+        Debug.LogError(FindObjectOfType<MonoBehaviour>().GetType().IsSubclassOf(typeof(ObjectScript)));
 
-            if (LevelManager.Instance.player.GetComponent<PlayerInteraction>().interactingGameobject != null)
-            {
-                LevelManager.Instance.player.GetComponent<PlayerInteraction>().playerIsInteracting = false;
-                LevelManager.Instance.player.GetComponent<PlayerInteraction>().interactingGameobject = null;
-            }
+        //if (gameObject.GetComponent<>.GetType().IsSubclassOf(typeof(ObjectScript)))
+        if (FindObjectOfType<WaterSystem>().GetType().IsSubclassOf(typeof(ObjectScript)))
+        {
+            LevelManager.Instance.player.GetComponent<PlayerInteraction>().interactingGameobject = transform.gameObject;
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    public void StopInteract()
     {
-        if (other.transform.tag == "EggBasket" && transform.name == "Egg")
+        Debug.Log("Got to the StopInteract void");
+        if (transform.name == "Seeds" || transform.name == "Egg")
         {
-            LevelManager.Instance.ui.GetComponent<UserInterfaceManager>().eggsFound--;
-            LevelManager.Instance.ui.GetComponent<UserInterfaceManager>().UpdateToDo();
+            transform.parent = null;
+            AdjustRigidbodyForPickup();
+        }
+
+        LevelManager.Instance.player.GetComponent<PlayerInteraction>().playerIsInteracting = false;
+        LevelManager.Instance.player.GetComponent<PlayerInteraction>().interactingGameobject = null;
+    }
+
+    public void AdjustRigidbodyForPickup()
+    {
+        GetComponent<Rigidbody>().useGravity = !GetComponent<Rigidbody>().useGravity;
+        playerHoldingObject = !playerHoldingObject;
+    }
+
+    public void Update()
+    {
+        if (playerHoldingObject)
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }
 }

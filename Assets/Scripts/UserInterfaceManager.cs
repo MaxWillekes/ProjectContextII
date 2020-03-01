@@ -14,6 +14,9 @@ public class UserInterfaceManager : MonoBehaviour
     public Image sleepImage;
     public Image FinalImage;
 
+    private Image HungerBarImage;
+    private Image ThirstBarImage;
+
     public int taskSet1Progression = 0;
 
     public int eggsFound;
@@ -24,14 +27,31 @@ public class UserInterfaceManager : MonoBehaviour
 
     private bool petFed = false;
 
+    private void Start()
+    {
+        HungerBarImage = GameObject.FindGameObjectWithTag("HungerBar").GetComponent<Image>();
+        ThirstBarImage = GameObject.FindGameObjectWithTag("ThirstBar").GetComponent<Image>();
+    }
+
+    private void Update()
+    {
+        Debug.Log(LevelManager.Instance.HungerRemaining);
+        Debug.Log(LevelManager.Instance.ThirstRemaining);
+
+        HungerBarImage.fillAmount = LevelManager.Instance.HungerRemaining/100;
+        ThirstBarImage.fillAmount = LevelManager.Instance.ThirstRemaining/100;
+    }
+
     public void UpdateToDo()
     {
+        Debug.Log("Update");
         switch (LevelManager.Instance.day)
         {
             case 0:
                 switch (taskSet1Progression)
                 {
                     case 0:
+                        Debug.Log("Update");
                         toDoListLine1.text = "Check on main water system. - Finished";
                         toDoListLine2.text = "Go to rest.";
                         break;

@@ -30,7 +30,7 @@ public class PetMovement : MonoBehaviour
         {
             child.GetComponent<Animator>().enabled = false;
             Debug.Log(child.transform.GetChild(2).name);
-            //child.gameObject.transform.LookAt(LevelManager.Instance.player.transform, Vector3.up);
+            child.transform.GetChild(2).gameObject.transform.LookAt(Camera.main.transform, Vector3.up);
         }
 
         transform.position = new Vector3(transform.position.x, startingHeigt, transform.position.z);

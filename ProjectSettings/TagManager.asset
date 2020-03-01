@@ -6,6 +6,15 @@ TagManager:
   tags:
   - InteractAble
   - SceneManager
+  - Pet
+  - EggBasket
+  - Egg
+  - WaterSystem
+  - ClimateControl
+  - Seeds
+  - Bed
+  - HungerBar
+  - ThirstBar
   layers:
   - Default
   - TransparentFX

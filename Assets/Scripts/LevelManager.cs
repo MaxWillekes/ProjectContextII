@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
     public GameObject Egg1;
     public GameObject Egg2;
 
+    public float HungerRemaining = 100;
+    public float ThirstRemaining = 100;
+
     public int day = 0;
 
     [SerializeField]
@@ -68,5 +71,11 @@ public class LevelManager : MonoBehaviour
         }
 
         ui.taskSet1Progression = 0;
+    }
+
+    public void Update()
+    {
+        HungerRemaining -= 0.01f;
+        ThirstRemaining -= 0.015f;
     }
 }

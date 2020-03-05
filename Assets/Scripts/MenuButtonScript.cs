@@ -14,7 +14,7 @@ public class MenuButtonScript : MonoBehaviour
     public void LoadLevel()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Level");
     }
 

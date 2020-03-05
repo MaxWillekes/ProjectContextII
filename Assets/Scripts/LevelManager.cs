@@ -73,9 +73,36 @@ public class LevelManager : MonoBehaviour
         ui.taskSet1Progression = 0;
     }
 
-    public void Update()
+    public void RemoveThirst()
     {
-        HungerRemaining -= 0.01f;
-        ThirstRemaining -= 0.015f;
+        ThirstRemaining += 50;
+    }
+
+    public void RemoveHunger()
+    {
+        HungerRemaining += 35;
+    }
+
+    public void Update()
+    { 
+        if( HungerRemaining >= 100)
+        {
+            HungerRemaining = 100;
+        }
+
+        if (ThirstRemaining >= 100)
+        {
+            ThirstRemaining = 100;
+        }
+
+        HungerRemaining -= 0.005f;
+        ThirstRemaining -= 0.00885f;
+
+        if(HungerRemaining <= 0 || ThirstRemaining <= 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

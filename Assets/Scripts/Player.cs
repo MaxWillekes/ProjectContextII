@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("MainMenu");
         }
     }

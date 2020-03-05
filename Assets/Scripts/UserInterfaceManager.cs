@@ -11,7 +11,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     //public Text bedText;
 
-    public Image sleepImage;
+    public Image BlackScreen;
     public Image FinalImage;
 
     private Image HungerBarImage;
@@ -27,6 +27,8 @@ public class UserInterfaceManager : MonoBehaviour
 
     private bool petFed = false;
 
+    //private Color 
+
     private void Start()
     {
         HungerBarImage = GameObject.FindGameObjectWithTag("HungerBar").GetComponent<Image>();
@@ -35,8 +37,8 @@ public class UserInterfaceManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(LevelManager.Instance.HungerRemaining);
-        Debug.Log(LevelManager.Instance.ThirstRemaining);
+        //Debug.Log(LevelManager.Instance.HungerRemaining);
+        //Debug.Log(LevelManager.Instance.ThirstRemaining);
 
         HungerBarImage.fillAmount = LevelManager.Instance.HungerRemaining/100;
         ThirstBarImage.fillAmount = LevelManager.Instance.ThirstRemaining/100;
@@ -123,10 +125,17 @@ public class UserInterfaceManager : MonoBehaviour
         }
     }
 
+    public void FadeIn()
+    {
+        
+        BlackScreen.gameObject.SetActive(true);
+        //BlackScreen.color
+    }
+
     public IEnumerator SetNightImage()
     {
-        sleepImage.gameObject.SetActive(true);
+        BlackScreen.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
-        sleepImage.gameObject.SetActive(false);
+        BlackScreen.gameObject.SetActive(false);
     }
 }

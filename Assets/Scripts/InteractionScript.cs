@@ -17,6 +17,12 @@ public class InteractionScript : MonoBehaviour
                     LevelManager.Instance.ui.UpdateToDo();
                 }
                 break;
+            case "WaterTapPoint":
+                LevelManager.Instance.RemoveThirst();
+                break;
+            case "FoodInteractionPoint":
+                LevelManager.Instance.RemoveHunger();
+                break;
             case "Seeds":
                 transform.parent = LevelManager.Instance.player.transform;
                 AdjustRigidbodyForPickup();

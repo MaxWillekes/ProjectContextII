@@ -14,7 +14,6 @@ public class PetMovement : MonoBehaviour
         child = transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.LookAt(LevelManager.Instance.player.transform);
@@ -29,11 +28,11 @@ public class PetMovement : MonoBehaviour
         else
         {
             child.GetComponent<Animator>().enabled = false;
-            Debug.Log(child.transform.GetChild(2).name);
+            //Debug.Log(child.transform.GetChild(2).name);
             child.transform.GetChild(2).gameObject.transform.LookAt(Camera.main.transform, Vector3.up);
         }
-
+            
         transform.position = new Vector3(transform.position.x, startingHeigt, transform.position.z);
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+        transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
     }
 }

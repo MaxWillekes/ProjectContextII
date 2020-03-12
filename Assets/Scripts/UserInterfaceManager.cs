@@ -12,7 +12,6 @@ public class UserInterfaceManager : MonoBehaviour
     //public Text bedText;
 
     public Image BlackScreen;
-    public Image FinalImage;
 
     private Image HungerBarImage;
     private Image ThirstBarImage;
@@ -118,7 +117,6 @@ public class UserInterfaceManager : MonoBehaviour
                 toDoListLine3.text = "";
                 break;
             case 3:
-                FinalImage.gameObject.SetActive(true);
                 toDoListLine1.text = "Investigate hull disruption";
                 toDoListLine2.text = "";
                 break;

@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject OpenDome;
 
+    [SerializeField]
+    private DayTrigger dayTrigger;
+
     void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -38,16 +41,11 @@ public class LevelManager : MonoBehaviour
         ui = FindObjectOfType<UserInterfaceManager>();
     }
 
-    public void ChangeLighting()
-    {
+    public void ChangeLighting() =>
         mainLight.color = newLampColor;
-    }
 
-    public void ChangeDome()
-    {
-        OpenDome.SetActive(true);
-        ClosedDome.SetActive(false);
-    }
+    public void ChangeDome() =>
+        dayTrigger.gameObject.SetActive(true);
 
     public void NewDay()
     {

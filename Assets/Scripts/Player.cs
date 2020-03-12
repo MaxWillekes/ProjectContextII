@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
